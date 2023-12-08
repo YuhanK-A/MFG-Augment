@@ -1,0 +1,38 @@
+%% Image visulaization
+close all
+clear all
+train_images=importdata('train_images.mat');
+train_labels=importdata('train_labels.mat');
+
+% for i = 1:49
+%     subplot(7,7,i)
+%     imshow(train_images(:,:,i),'InitialMagnification', 600);
+% end
+
+source_image_idx = 3 % choose your source Mnist image index
+target_image_idx = 4 % choose your target Mnist image index
+source_image_label = train_labels(source_image_idx)
+target_image_label = train_labels(target_image_idx)
+
+
+N=2;
+x=zeros(28,28,N);
+for i=1:2
+    if i==1
+      x(:,:,i) = 28*28*train_images(:,:,source_image_idx)/sum(sum(train_images(:,:,3)));
+    else
+      x(:,:,i) = 28*28*train_images(:,:,target_image_idx)/sum(sum(train_images(:,:,4)));
+    end
+end
+
+figure(1)
+imshow(x(:,:,1), 'InitialMagnification', 100)
+figure(2)
+imshow(x(:,:,2), 'InitialMagnification', 100)
+
+%% MFG Image-Level Augment Calculation
+path = mfg_2d_terminal_cost_KL_NeumannBdry(x)
+
+
+%% Generate movie
+make_movie_only_rho(path, source_image_label, target_image_label)
