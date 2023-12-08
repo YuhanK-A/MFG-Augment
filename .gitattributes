@@ -1,3 +1,4 @@
 MFG[[:space:]]Feature[[:space:]]Level[[:space:]]Augment filter=lfs diff=lfs merge=lfs -text
 *.pth filter=lfs diff=lfs merge=lfs -text
 *.mat filter=lfs diff=lfs merge=lfs -text
+MFG[[:space:]]Image[[:space:]]Level[[:space:]]Augment filter=lfs diff=lfs merge=lfs -text
